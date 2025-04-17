@@ -1,0 +1,50 @@
+a {
+    color: rgb(0, 0, 0);
+}
+
+body {
+    background: white url("images/background.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+
+table, td, th {
+    border: 5px solid transparent;
+    border-collapse: collapse;
+    border-radius: 12px;
+    padding: 50px;
+    font-size: 20px;
+}
+
+td {
+    background-color: #96D4D4;
+    opacity: 50%;  
+}
+
+th {
+    background-color: #1a9191;
+    opacity: 50%;  
+}
+
+td:hover {
+    background-color: #96D4D4;
+    opacity: 80%;
+}
+
+.index_table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.results_table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.results_table td, th {
+    padding: 20px;
+    padding-inline: 100px;
+}
