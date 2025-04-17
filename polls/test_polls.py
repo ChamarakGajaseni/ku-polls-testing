@@ -31,8 +31,19 @@ def choice(question):
         choice_text="Test Choice"
     )
 
-@pytest.mark.django_db
+# Use transaction=True to ensure each test runs in a transaction that gets rolled back
+@pytest.mark.django_db(transaction=True)
 class TestQuestionModel:
+    @pytest.fixture
+    def question(self):
+        # Create a new question for each test
+        return Question.objects.create(
+            question_text="Test Question",
+            pub_date=timezone.now() - datetime.timedelta(hours=12)  # Within 24 hours
+        )
+
+    def test_was_published_recently(self, question):
+        assert question.was_published_recently() is True
 
     def test_is_published(self, question):
         assert question.is_published() is True
@@ -58,8 +69,27 @@ class TestQuestionModel:
         )
         assert question.can_vote() is False
 
-@pytest.mark.django_db
+@pytest.mark.django_db(transaction=True)
 class TestChoiceModel:
+    @pytest.fixture
+    def question(self):
+        return Question.objects.create(
+            question_text="Test Question",
+            pub_date=timezone.now() - datetime.timedelta(days=1)
+        )
+    
+    @pytest.fixture
+    def choice(self, question):
+        return Choice.objects.create(
+            question=question,
+            choice_text="Test Choice"
+        )
+    
+    @pytest.fixture
+    def user(self):
+        # Create a test user
+        return User.objects.create_user(username='testuser', password='testpass123')
+    
     def test_choice_votes(self, choice, user):
         Vote.objects.create(user=user, choice=choice)
         assert choice.votes == 1
@@ -67,14 +97,56 @@ class TestChoiceModel:
     def test_choice_str(self, choice):
         assert str(choice) == "Test Choice"
 
-@pytest.mark.django_db
+@pytest.mark.django_db(transaction=True)
 class TestVoteModel:
+    @pytest.fixture
+    def question(self):
+        return Question.objects.create(
+            question_text="Test Question",
+            pub_date=timezone.now() - datetime.timedelta(days=1)
+        )
+    
+    @pytest.fixture
+    def choice(self, question):
+        return Choice.objects.create(
+            question=question,
+            choice_text="Test Choice"
+        )
+    
+    @pytest.fixture
+    def user(self):
+        # Create a test user
+        return User.objects.create_user(username='testuser', password='testpass123')
+    
     def test_vote_creation(self, choice, user):
         vote = Vote.objects.create(user=user, choice=choice)
         assert str(vote) == f"{user.username} voted for {choice.choice_text}"
 
-@pytest.mark.django_db
+@pytest.mark.django_db(transaction=True)
 class TestViews:
+    @pytest.fixture
+    def client(self):
+        return Client()
+    
+    @pytest.fixture
+    def question(self):
+        return Question.objects.create(
+            question_text="Test Question",
+            pub_date=timezone.now() - datetime.timedelta(days=1)
+        )
+    
+    @pytest.fixture
+    def choice(self, question):
+        return Choice.objects.create(
+            question=question,
+            choice_text="Test Choice"
+        )
+    
+    @pytest.fixture
+    def user(self):
+        # Create a test user
+        return User.objects.create_user(username='testuser', password='testpass123')
+    
     def test_index_view(self, client, question):
         response = client.get(reverse('polls:index'))
         assert response.status_code == 200
