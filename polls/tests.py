@@ -315,5 +315,3 @@ class TestPollResults:
         assert 'Test Question' in str(response.content)
         assert 'Choice 1' in str(response.content)
         assert 'Choice 2' in str(response.content)
-
-
