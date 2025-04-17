@@ -39,10 +39,9 @@ python manage.py test polls.tests.QuestionModelTests
 python manage.py test polls.tests.QuestionModelTests.test_can_vote
 ```
 
-4. Run tests with coverage report:
+4. Run pytest:
 ```bash
-coverage run -m pytest polls/tests.py
-coverage report
+pytest polls/test_polls.py -v
 ```
 
 The tests cover:
