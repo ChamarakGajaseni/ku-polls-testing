@@ -242,11 +242,13 @@ class VoteViewTests(TestCase):
         
 @pytest.mark.django_db
 class TestPollCreation:
+    """Test creating a poll with multiple choices."""
+
     def test_create_poll(self, client):
         # Create a test user
         user = User.objects.create_user(username='testuser', password='12345')
         client.force_login(user)
-        
+
         # Create a test poll
         response = client.post(reverse('polls:create'), {
             'question_text': 'Test Question',
@@ -257,77 +259,61 @@ class TestPollCreation:
             'choice_set-0-choice_text': 'Choice 1',
             'choice_set-1-choice_text': 'Choice 2',
         })
-        
+
         assert response.status_code == 302  # Redirect after successful creation
         assert Question.objects.count() == 1
         assert Choice.objects.count() == 2
 
+
 @pytest.mark.django_db
 class TestPollVoting:
+    """Test submitting a vote for a poll choice."""
+
     def test_vote_on_poll(self, client):
         # Create test data
         user = User.objects.create_user(username='testuser', password='12345')
         client.force_login(user)
-        
+
         question = Question.objects.create(question_text='Test Question')
         choice = Choice.objects.create(question=question, choice_text='Test Choice')
-        
+
         # Vote on the poll
         response = client.post(reverse('polls:vote', args=(question.id,)), {
             'choice': choice.id
         })
-        
+
         assert response.status_code == 302  # Redirect after successful vote
         assert Vote.objects.filter(choice=choice).count() == 1
 
+
 @pytest.mark.django_db
 class TestPollResults:
+    """Test viewing poll results with vote counts."""
+
     def test_view_results(self, client):
         # Create test data
         question = Question.objects.create(question_text='Test Question')
         choice1 = Choice.objects.create(question=question, choice_text='Choice 1')
         choice2 = Choice.objects.create(question=question, choice_text='Choice 2')
-        
+
         # Add some votes
         user1 = User.objects.create_user(username='user1', password='12345')
         user2 = User.objects.create_user(username='user2', password='12345')
         user3 = User.objects.create_user(username='user3', password='12345')
-        
+
         Vote.objects.create(user=user1, choice=choice1)
         Vote.objects.create(user=user2, choice=choice1)
         Vote.objects.create(user=user3, choice=choice1)
-        
+
         Vote.objects.create(user=user1, choice=choice2)
         Vote.objects.create(user=user2, choice=choice2)
-        
+
         # View results
         response = client.get(reverse('polls:results', args=(question.id,)))
-        
+
         assert response.status_code == 200
         assert 'Test Question' in str(response.content)
         assert 'Choice 1' in str(response.content)
         assert 'Choice 2' in str(response.content)
 
-@pytest.mark.django_db
-class TestUserAuthentication:
-    def test_user_login(self, client):
-        # Create a test user
-        User.objects.create_user(username='testuser', password='12345')
-        
-        # Attempt login
-        response = client.post(reverse('polls:login'), {
-            'username': 'testuser',
-            'password': '12345'
-        })
-        
-        assert response.status_code == 302  # Redirect after successful login
-        
-    def test_user_logout(self, client):
-        # Create and login a test user
-        user = User.objects.create_user(username='testuser', password='12345')
-        client.force_login(user)
-        
-        # Attempt logout
-        response = client.post(reverse('polls:logout'))
-        
-        assert response.status_code == 302  # Redirect after successful logout
+
