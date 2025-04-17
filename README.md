@@ -36,7 +36,7 @@ python manage.py test polls.tests.QuestionModelTests
 
 3. Run specific test methods:
 ```bash
-python manage.py test polls.tests.QuestionModelTests.test_can_vote
+python manage.py test polls.tests.QuestionModelTests.test_can_vote_published_now
 ```
 
 4. Run tests with coverage report:
