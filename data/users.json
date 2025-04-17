@@ -1,0 +1,92 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$j1SEeAbt9i78hmJsWdnVvc$3Bwb5QsYbMtowgaN85W2G7ZxH5QpLyONc4cBySlNhOc=",
+    "last_login": "2024-12-15T14:52:27.698Z",
+    "is_superuser": false,
+    "username": "b6410546180",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-15T14:52:26.652Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Ip3t35Jxw9KqZdi7NxhBdy$PcMbrHejQfpPpbJgR1Zl2L6ForScnSjUhCpW3DvOPD4=",
+    "last_login": "2024-12-15T16:45:59.945Z",
+    "is_superuser": false,
+    "username": "b6410546149",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-15T16:45:59.094Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$XXuGT0ZpbbpS2URDBqBvtO$AQt/e73ssG+wvF3HHz8YuqSv0GMLUVEEMYYHmaXVGg0=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "TestAdmin",
+    "first_name": "",
+    "last_name": "",
+    "email": "Test@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-12-15T16:56:38.590Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$R6yUIeaf7KR5ZdZcIGTtBm$xTsEF6tp/6pjU1gLeAT02gB5B8m7Q51fVdxFTaj4G5w=",
+    "last_login": "2024-12-15T17:41:08.395Z",
+    "is_superuser": false,
+    "username": "b6410540000",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-15T17:41:07.440Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$NBSk0ScrYQo3x0D1zbKj8j$KPwcqBfCAukpzb3lTY6k9+hwKMGcPPLU1VxkRjDx+c0=",
+    "last_login": "2024-12-15T17:44:16.367Z",
+    "is_superuser": false,
+    "username": "b6410540001",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-12-15T17:44:15.525Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
