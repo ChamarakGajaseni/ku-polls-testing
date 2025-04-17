@@ -239,6 +239,7 @@ class VoteViewTests(TestCase):
 
         # Assert that the log contains the expected warning message
         self.assertTrue(any("Choice ID not found in POST data" in message for message in log.output))
+        
 @pytest.mark.django_db
 class TestPollCreation:
     def test_create_poll(self, client):
